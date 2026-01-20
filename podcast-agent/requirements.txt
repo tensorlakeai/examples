@@ -1,0 +1,6 @@
+tensorlake
+pydoll-python
+streamlit
+google-genai
+requests
+python-dotenv
