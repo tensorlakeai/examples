@@ -2,12 +2,6 @@
 
 A Tensorlake-powered workflow that crawls an article URL, summarizes the content with Gemini, and produces a podcast-ready MP3 using ElevenLabs.
 
-## Project Metadata
-
-- **Name**: Podcast Agent (HackerNews Podcast Generator)
-- **Author**: Arindam Majumder
-- **Platform**: Tensorlake Applications
-
 ## Features
 
 - **Crawl + clean**: Depth-first crawl with a Chromium-based scraper (PyDoll)
