@@ -7,7 +7,6 @@ A Tensorlake-powered workflow that crawls an article URL, summarizes the content
 - **Name**: Podcast Agent (HackerNews Podcast Generator)
 - **Author**: Arindam Majumder
 - **Platform**: Tensorlake Applications
-- **Source Repo**: https://github.com/Studio1HQ/Podcast-gen-Tensorlake
 
 ## Features
 
