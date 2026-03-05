@@ -1,0 +1,64 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "research-pack"
+version = "0.1.0"
+description = "Deep Research Pack — AI-powered research reports with citations, powered by Tensorlake"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Research Pack Authors" }]
+
+dependencies = [
+    # Tensorlake
+    "tensorlake>=0.1.0",
+    # LLM
+    "openai>=1.30.0",
+    # HTTP / crawling
+    "httpx>=0.27.0",
+    "beautifulsoup4>=4.12.0",
+    "lxml>=5.2.0",
+    "readability-lxml>=0.8.1",
+    # PDF (best-effort)
+    "pdfminer.six>=20231228",
+    # Dedup
+    "scikit-learn>=1.4.0",
+    "numpy>=1.26.0",
+    # Data models
+    "pydantic>=2.7.0",
+    # CLI
+    "typer>=0.12.0",
+    "rich>=13.7.0",
+    # Robots.txt
+    "protego>=0.3.1",
+    # Async
+    "anyio>=4.3.0",
+    # Utilities
+    "python-dateutil>=2.9.0",
+    "tldextract>=5.1.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
+    "pytest-httpx>=0.30.0",
+    "ruff>=0.4.0",
+]
+
+[project.scripts]
+research-pack = "research_pack.cli:app"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["research_pack*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]

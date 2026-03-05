@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "deep-research-pack"
+version = "0.1.0"
+description = "Deep Research Pack — crawl, dedupe, enrich, and synthesize research reports"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "tensorlake",
+    "openai>=1.30.0",
+    "httpx>=0.27.0",
+    "typer>=0.12.0",
+    "rich>=13.0.0",
+    "pydantic>=2.0.0",
+    "beautifulsoup4>=4.12.0",
+    "readability-lxml>=0.8.0",
+    "lxml>=5.0.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0.0", "pytest-cov"]
+
+[project.scripts]
+deeprp = "research_pack.cli:app"
+
+[tool.setuptools.packages.find]
+include = ["research_pack*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
