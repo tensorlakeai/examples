@@ -29,6 +29,18 @@ A Tensorlake-powered workflow that crawls an article URL, summarizes the content
 
 [View Example →](./podcast-agent/)
 
+### 🧬 [Self-Evolve](./self-evolve/)
+
+A self-evolving bug-fix agent that mutates its own prompt-and-tools genome, evaluates each candidate in Tensorlake sandboxes, and keeps the changes that improve benchmark performance.
+
+**Features:**
+- Iterative genome mutation with planner and critic loops
+- Fast candidate evaluation using reusable Tensorlake snapshots
+- Built-in benchmark tasks and tests for measuring improvement
+- Simple local setup for running manual evals or full evolution rounds
+
+[View Example →](./self-evolve/)
+
 ## Contributing
 
 We welcome contributions! If you have an example application using Tensorlake, please feel free to submit a pull request.

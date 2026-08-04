@@ -1,0 +1,18 @@
+{
+  "comment": "5 hard LeetCode problems, each shipped as a buggy stub. Train tasks each show one failing test from one problem; eval is held-out failing tests from the same problems. Agent must fix the bug to pass the FULL 30-test suite.",
+  "train": [
+    {"id": "t_regex",  "shown_test": "tests/test_regex_match.py::test_regex_v4_a_star_a_classic"},
+    {"id": "t_trap",   "shown_test": "tests/test_trap_water.py::test_trap_v5_descending_then_ascending"},
+    {"id": "t_edit",   "shown_test": "tests/test_edit_distance.py::test_edit_v4_horse_ros"},
+    {"id": "t_rect",   "shown_test": "tests/test_max_rectangle.py::test_rect_v5_tall_column"},
+    {"id": "t_burst",  "shown_test": "tests/test_burst_balloons.py::test_burst_v4_classic_leetcode"}
+  ],
+  "eval": [
+    {"id": "e_regex",  "shown_test": "tests/test_regex_match.py::test_regex_v6_mississippi_pos"},
+    {"id": "e_trap",   "shown_test": "tests/test_trap_water.py::test_trap_v6_max_at_end"},
+    {"id": "e_edit",   "shown_test": "tests/test_edit_distance.py::test_edit_v5_intention_execution"},
+    {"id": "e_rect",   "shown_test": "tests/test_max_rectangle.py::test_rect_v4_classic_leetcode"},
+    {"id": "e_burst",  "shown_test": "tests/test_burst_balloons.py::test_burst_v5_descending"}
+  ],
+  "full_suite": "tests/"
+}
