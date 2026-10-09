@@ -27,6 +27,7 @@ import os
 import re
 import sys
 import time
+from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import Any
 
@@ -79,9 +80,11 @@ agent_image = (
     Image(name=AGENT_IMAGE_NAME, base_image="ubuntu-systemd")
     .run(
         "apt-get update -qq && "
-        "apt-get install -y -qq git curl ca-certificates python3 python3-pip nodejs npm"
+        "apt-get install -y -qq git curl ca-certificates python3 python3-pip"
     )
-    .run("python3 -m pip install --break-system-packages -q pytest")
+    .run("curl -fsSL https://deb.nodesource.com/setup_24.x | bash - && apt-get install -y nodejs")
+    .run("npm install --global --ignore-scripts pnpm@11.28.5")
+    .run("python3 -m pip install --break-system-packages -q pytest PyYAML")
 )
 
 
@@ -465,6 +468,8 @@ def generate_patches(client: Anthropic, vulns: list[Vulnerability], max_workers:
 def _detect_project(sandbox: Sandbox) -> tuple[str, str]:
     listing = sandbox.run("bash", ["-lc", f"ls {REPO_DIR}"], timeout=10)
     files = set((listing.stdout or "").split())
+    if "package.json" in files and "pnpm-lock.yaml" in files:
+        return "node", f"cd {REPO_DIR} && pnpm test"
     if "package.json" in files:
         return "node", f"cd {REPO_DIR} && npm test --silent"
     if "requirements.txt" in files or "pyproject.toml" in files:
@@ -477,8 +482,10 @@ def _install_deps(sandbox: Sandbox, project_type: str) -> bool:
     so the caller can decide whether to continue or short-circuit validation."""
     _log("validate", f"installing {project_type} deps...")
     if project_type == "node":
+        helper = Path(__file__).with_name("guarded_node_install.py").read_bytes()
+        sandbox.write_file("/tmp/guarded_node_install.py", helper)
         result = sandbox.run(
-            "bash", ["-lc", f"cd {REPO_DIR} && npm install --no-audit --no-fund"],
+            "python3", ["-I", "/tmp/guarded_node_install.py", REPO_DIR],
             timeout=900,
         )
     elif project_type == "python":

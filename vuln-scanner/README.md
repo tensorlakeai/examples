@@ -34,3 +34,12 @@ The agent runs locally and drives Claude through detect → triage → patch, bu
 - Python 3.10+
 - [Tensorlake account](https://cloud.tensorlake.ai/)
 - [Anthropic API key](https://console.anthropic.com/)
+
+### Dependency installation
+
+The scanner installs Node dependencies with pnpm 11.28.5, a strict 24-hour
+release delay, required timestamps and disabled hooks. Existing longer delays
+are preserved. npm locks are imported before the frozen guarded install; npm
+test commands remain supported. This may reveal undeclared dependencies that
+previously depended on npm hoisting. Installation failure stops validation.
+Paid scans and Linux image validation are required before merging this change.
